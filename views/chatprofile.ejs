@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/chatprofile.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="main">
+        <div id="first">
+            <div id="information">
+                <div id="image"></div>
+                <div id="data">
+                    <div id="inbox"><h1>inbox</h1></div>
+                    <div id="sentbtn"><h1>sent</h1></div>
+                </div>
+            </div>
+
+        </div>
+        <div id="second">
+            <!-- <div id="second-top">
+                <div id="chat-img"></div>
+                <div id="chat-name">
+                    <%=user.username%>
+                </div>
+            </div> -->
+            <div id="second-rs">
+                <div id="second-recieved"><h1>Recieved</h1></div>
+                <div id="second-sent"><h1>Sent</h1></div>
+            </div>
+            <div id="message-area">
+                <div id="ma-r">
+                    <!-- <div id="recieved">
+                        <div id="rm-text"> default</div>
+                        <div id="rm-mic"></div>
+                    </div> -->
+                    <% sender.receivedMsg.forEach(function(message){  %>
+                        <div id="recieved">
+                            <div id="rm-text"><%= message.msgtext %></div>
+                            <a href="/speak/<%=message.msgtext%>/<%=user.username%>" id="rm-mic"></a>
+                            <a href="/stopspeak" id="rm-stop"></a>
+                        </div>
+                        <% }) %>
+                </div>
+
+                <div id="ma-s">
+                    <div id="ma-s-msg">
+                        <!-- <div id="sent">
+                            <div id="sm-text">...default</div>
+                            <div id="sm-mic"></div>
+                        </div> -->
+                        <% sent.sentMsg.forEach(function(message){  %>
+                            <div id="recieved">
+                                <div id="rm-text"><%= message.msgtext %></div>
+        
+
+                                <a href="/speak/<%=message.msgtext%>/<%=user.username%>" id="rm-mic"></a>
+                                <a href="/stopspeak" id="rm-stop"></a>
+                            </div>
+                            <% }) %>
+                    </div>
+                    <form id="send-msg" method="post" action="/compose/<%=user.username%>">
+                        <textarea name="ta" id="ta" placeholder="enter your matter"></textarea>
+                        <div id="mic"></div>
+                        <input id="send-btn" type="submit" value="send">
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div id="third">
+            <div id="third-top">
+                <h1>Users</h1>
+            </div>
+            <% allusers.forEach(function(elem){ %>
+                <% if(elem.username!=sender.username){ %>
+                    <div id="online-user">
+                        <a id="user" href="/chat/<%=sender.username%>/<%=elem.username%>">
+                            <%=elem.username%>
+                        </a>
+                    </div>
+                    <% }%>
+                        <% }) %>
+        </div>
+    </div>
+    <script>
+        document.querySelector("#second-recieved").addEventListener("click", function () {
+            document.querySelector("#ma-s").style.left = "0%";
+
+        })
+        document.querySelector("#second-sent").addEventListener("click", function () {
+            document.querySelector("#ma-s").style.left = "-50%";
+        })
+
+        var speak = document.getElementById('mic');
+        var ta = document.getElementById('ta');
+        var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var recognition = new SpeechRecognition();
+
+        speak.addEventListener('click', function () {
+            recognition.start();
+            ta.innerHTML = '...speak...';
+        })
+        recognition.onresult = function (e) {
+            var transcript = e.results[0][0].transcript;
+            ta.innerHTML = transcript;
+        }
+    </script>
+</body>
+
+</html>

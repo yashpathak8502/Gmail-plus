@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <title>Chat-box</title>
+</head>
+
+<body>
+
+    <div id="main">
+
+        <div id="first">
+            <div id="information">
+                <div id="image"></div>
+                <div id="data">
+                    <div id="inbox"><h1>inbox</h1></div>
+                    <div id="sentbtn"><h1>sent</h1></div>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="second">
+            <h1>select a person to interact with</h1>
+        </div>
+
+        <div id="third">
+            <div id="third-top"></div>
+           <% allusers.forEach(function(elem){ %>
+            <%if(elem.username!=user.username){%>
+                <div id="online-user">
+                    <a id="user" href="/chat/<%=user.username%>/<%=elem.username%>"><%=elem.username%></a>
+                </div>
+           <% }%>
+          <% }) %>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+
+<!-- <h1>hi there profiel page of</h1>
+<h1><%=user.username %></h1>
+<h1><%=user.email %></h1>
+
+hi ther this is a profile page
+<a href="/speak/male">this is the button to speak up male voice</a>
+<a href="/speak/female">this is the button to speak up female voice</a> -->

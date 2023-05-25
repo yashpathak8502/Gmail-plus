@@ -1,0 +1,21 @@
+  function getVoices() {
+    return new Promise((resolve) => {
+      say.getInstalledVoices((err, voice) => {
+        return resolve(voice)
+      })
+    })
+  }
+  async function usingVoices() {
+    const voicesList = await getVoices();
+    console.log(voicesList)
+  }
+  usingVoices()
+
+
+
+https://codepen.io/laurent-thevenet/pen/ZEKexN
+
+https://play-lh.googleusercontent.com/Q8klPWjtLQrBeeP2oDAtA0H0CrYZBpK8ckF3HnqDMT2L6GGdsUCjYc75mfRkoQyhrwfS
+
+
+https://static-s.aa-cdn.net/img/gp/20600014305522/qd4VphqFlUQiAOt_XnLRj-8Dll4VmH1_hXhuOIlF93y3HXWAodJwQyCywbHjZkXcTy2k?v=1

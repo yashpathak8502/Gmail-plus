@@ -1,0 +1,88 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    Register:
+
+  <form action="/register" method="post">
+    <input type="text" name="username" placeholder="username">
+    <input type="text" name="gender"  placeholder="gender">
+    <input type="text" name="password"  placeholder="password">
+    <input type="submit" value="sumbit">
+  </form>
+
+  <hr><hr>
+
+  Login:
+
+  <form action="/login" method="post" >
+    <input type="text" name="username"  placeholder="username">
+    <input type="text" name="password"  placeholder="password">
+    <input type="submit" value="sumbit">
+  </form>
+
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/stylesheets/loginreg.css">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <div class="container">
+    <div class="front_card">
+      <form action="/login" method="post">
+        <input type="text" name="username" placeholder="username">
+        <input type="text" name="password" placeholder="password">
+        <input  id="button" type="submit" value="sumbit">
+      </form>
+      <form action="/register" method="post">
+        <input type="text" name="username"  placeholder="username">
+        <input type="text" name="email"  placeholder="email">
+        <input type="text" name="password"  placeholder="password">
+        <input   id="button" type="submit" value="sumbit">
+      </form>
+    </div>
+    <div class="back_card">
+      <div class="login_msg">
+        <h2>Have account?</h2>
+        <button class="login_msg_btn">LogIn</button>
+      </div>
+      <div class="signup_msg">
+        <h2>Do not have account?</h2>
+        <button class="signup_msg_btn">SignUp</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const frontCard = document.querySelector(".front_card");
+    const signUpBtn = document.querySelector(".signup_msg_btn");
+    const loginBtn = document.querySelector(".login_msg_btn");
+    const userEmailInp = document.querySelector(".user_email");
+    const userFNameInp = document.querySelector(".user_full_name");
+
+    signUpBtn.addEventListener("click", () => {
+      frontCard.classList.add("front_card_signup");
+      userFNameInp.focus();
+    });
+
+    loginBtn.addEventListener("click", () => {
+      frontCard.classList.remove("front_card_signup");
+      userEmailInp.focus();
+    });
+
+  </script>
+</body>
+
+</html>
