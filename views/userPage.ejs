@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mail Application</title>
+  <link rel="stylesheet" href='/stylesheets/userPage.css'>
+</head>
+
+<body>
+  <header>
+    <h1>My Mail Application</h1>
+    <button id="composeBtn">Compose</button>
+  </header>
+
+  <main>
+
+    <section id="inbox">
+      <h2>Inbox</h2>
+      <ul id="inboxList">
+
+    
+
+        <% foundUser.receivedMsg.reverse().forEach(function(mail){ %>
+          <div class="email  <%= mail.read ? 'read':'unread'%>"">
+            <div class="details">
+              <div class="sender">
+                <%= mail.userid.username %>
+              </div>
+            </div>
+            <div class="message">
+              <%= mail.subject %>
+            </div>
+           <a id="readmore" href="/read/mail/<%=mail._id%>">Read</a>
+          </div>
+          <% }) %>
+      </ul>
+    </section>
+
+    <section id="sent">
+      <h2>Sent</h2>
+      <ul id="sentList">
+
+        
+
+        <% foundUser.sentMsg.reverse().forEach(function(mail){ %>
+          <div class="email">
+            <div class="details">
+              <div class="recipient">
+                <%= mail.reciever%>
+              </div>
+            </div>
+            <div class="message">
+              <%= mail.subject %>
+            </div>
+            <a id="readmore" href="/read/mail/<%=mail._id%>">Read</a>
+          </div>
+          <% }) %>
+      </ul>
+    </section>
+
+  </main>
+
+  <div id="composeModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Compose Mail</h2>
+
+      <form id="composeForm" method="post" action="/compose">
+        <div type="button" id="micButton"></div>
+        <input name="email" type="text" id="recipient" placeholder="To" required>
+        <input name="subject" type="text" id="recipient" placeholder="Subject" >
+        <textarea name="ta" id="message" placeholder="Body" style="height: 150px;"></textarea>
+        <button id="submitButton" type="submit" value="send">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // script.js
+    document.addEventListener("DOMContentLoaded", function () {
+      const composeBtn = document.getElementById("composeBtn");
+      const composeModal = document.getElementById("composeModal");
+      const closeModal = document.querySelector(".close");
+
+      composeBtn.addEventListener("click", function () {
+        composeModal.style.display = "block";
+      });
+
+      closeModal.addEventListener("click", function () {
+        composeModal.style.display = "none";
+      });
+
+      window.addEventListener("click", function (event) {
+        if (event.target == composeModal) {
+          composeModal.style.display = "none";
+        }
+      });
+
+      const composeForm = document.getElementById("composeForm");
+      composeForm.addEventListener("submit", function (event) {
+        composeModal.style.display = "none";
+      });
+    });
+
+    var speak = document.getElementById('micButton');
+    var ta = document.getElementById('message');
+    var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    var recognition = new SpeechRecognition();
+
+    speak.addEventListener('click', function () {
+      recognition.start();
+      ta.innerHTML = '...speak...';
+    })
+    recognition.onresult = function (e) {
+      var transcript = e.results[0][0].transcript;
+      ta.innerHTML = transcript;
+      console.log(transcript)
+    }
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+

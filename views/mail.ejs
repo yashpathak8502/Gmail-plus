@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail Page</title>
+    <link rel="stylesheet" href="/stylesheets/mail.css">
+</head>
+<body>
+    <header>
+        <h1>Dedicated Mail</h1>
+    </header>
+
+    <main>
+        <div class="mail">
+            <div class="header">
+                <div class="from"> <%= mail.userid.username %> </div>
+                <div class="subject">Subject: <%=mail.subject%></div>
+                <div class="date">Date: <%=mail.createdAt%></div>
+            </div>
+            <div class="body">
+                <a href="/speak/<%=mail.msgtext%>"><button class="speakerButton"></button></a>
+                <a href="/stopspeak"><button class="antispeakerButton"></button></a>
+               <p><%=mail.msgtext%></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

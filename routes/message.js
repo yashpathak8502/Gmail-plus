@@ -9,8 +9,16 @@ const msgSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "user"
     },
+    subject:{
+        type:String,
+        default:"No Subject"
+    },
     reciever: String,
-    msgtext: String
+    msgtext: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 module.exports=mongoose.model("msg",msgSchema);
